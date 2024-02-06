@@ -90,7 +90,7 @@ describe('Calculator.vue', () => {
         wrapper.vm.handleNumpadInput(2);
         wrapper.vm.calculate();
 
-        wrapper.vm.ansButtonPressed()
+        wrapper.vm.ansButtonPressed();
         wrapper.vm.calculate();
 
 
