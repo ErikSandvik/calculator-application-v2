@@ -1,0 +1,8 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`Calculator > should render correctly 1`] = `
+"<div data-v-c735fc0c="" id="calculator" class="">
+  <div data-v-c735fc0c="" id="equation" class="calcScreen"></div>
+  <div data-v-c735fc0c="" id="currentNumber" class="calcScreen">0</div><button data-v-c735fc0c="" id="c" class="calcButton">C</button><button data-v-c735fc0c="" id="ans" class="calcButton">ANS</button><button data-v-c735fc0c="" id="del" class="calcButton">DEL</button><button data-v-c735fc0c="" id="plus" class="calcButton operatorButton">+</button><button data-v-c735fc0c="" id="one" class="calcButton">1</button><button data-v-c735fc0c="" id="two" class="calcButton">2</button><button data-v-c735fc0c="" id="three" class="calcButton">3</button><button data-v-c735fc0c="" id="min" class="calcButton operatorButton">-</button><button data-v-c735fc0c="" id="four" class="calcButton">4</button><button data-v-c735fc0c="" id="five" class="calcButton">5</button><button data-v-c735fc0c="" id="six" class="calcButton">6</button><button data-v-c735fc0c="" id="multi" class="calcButton operatorButton">*</button><button data-v-c735fc0c="" id="seven" class="calcButton">7</button><button data-v-c735fc0c="" id="eight" class="calcButton">8</button><button data-v-c735fc0c="" id="nine" class="calcButton">9</button><button data-v-c735fc0c="" id="divide" class="calcButton operatorButton">/</button><button data-v-c735fc0c="" id="blank" class="calcButton"></button><button data-v-c735fc0c="" id="zero" class="calcButton">0</button><button data-v-c735fc0c="" id="point" class="calcButton">.</button><button data-v-c735fc0c="" id="equals" class="calcButton">=</button>
+</div>"
+`;
