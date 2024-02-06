@@ -1,0 +1,97 @@
+<template>
+  <div id="logWindow">
+    <div id="logWindowTitle">Log</div>
+    <ul id="logList">
+      <li v-for="(logEntry, index) in calcLog" :key="index">{{ logEntry }}</li>
+    </ul>
+  </div>
+</template>
+
+<script>
+export default {
+  name: "LogWindow",
+  props: {
+    calcLog: [],
+  },
+  data() {
+    return {
+      logButtonIsPressed : false,
+    }
+  },
+}
+</script>
+
+<style scoped>
+#logWindow {
+  border-radius: var(--radius);
+  padding-top: var(--padding);
+  background-color: #4d4694;
+  margin-left: 25%;
+  margin-right: 25%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  overflow-y: auto;
+}
+
+#logWindow::-webkit-scrollbar{
+  width: 0.3rem;
+}
+
+#logWindow::-webkit-scrollbar-thumb{
+  background-color: rgba(21, 20, 40, 0.87);
+  border-radius: var(--radius);
+  padding-top: var(--padding);
+}
+
+#logWindow::-webkit-scrollbar-track{
+  border-radius: var(--radius);
+  padding-top: var(--padding);
+  background-color: #ffffff;
+}
+
+#logList {
+  font-weight: 300;
+  font-family: palatino, sans-serif;
+  font-size: 0.9rem;
+  list-style: none;
+  text-align: left;
+  padding: 0;
+}
+
+#logList li {
+
+  margin-bottom: 1.5rem;
+  margin-top: 0.8rem;
+
+  text-align: center;
+}
+
+#logWindowTitle {
+  font-weight: 500;
+  font-family: Tahoma, sans-serif;
+  font-size: 1.1rem;
+  margin: 0;
+}
+
+@media only screen and (max-width: 650px) {
+  #logWindow {
+    background-color: #161634;
+    margin: 0;
+  }
+
+  #logWindow::-webkit-scrollbar-thumb{
+    background-color: rgba(128, 128, 128, 0.61);
+    border-radius: var(--radius);
+    padding-top: var(--padding);
+  }
+
+  #logWindow::-webkit-scrollbar-track{
+    border-radius: var(--radius);
+    padding-top: var(--padding);
+    background-color: #000000;
+  }
+
+}
+</style>
