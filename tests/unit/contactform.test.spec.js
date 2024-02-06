@@ -29,8 +29,5 @@ describe('ContactForm.vue', () => {
         const wrapper = mount(app)
         expect(wrapper.html()).toMatchSnapshot();
     })
-
-
-
 })
 
