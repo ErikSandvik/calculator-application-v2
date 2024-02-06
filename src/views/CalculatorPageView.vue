@@ -11,10 +11,10 @@
 </template>
 
 <script>
-import Header from "@/components/Header";
-import Calculator from "@/components/Calculator";
-import LogButton from "@/components/LogButton";
-import LogWindow from "@/components/LogWindow";
+import Header from "@/components/Header.vue";
+import Calculator from "@/components/Calculator.vue";
+import LogButton from "@/components/LogButton.vue";
+import LogWindow from "@/components/LogWindow.vue";
 
 export default {
   name: "CalculatorPage",

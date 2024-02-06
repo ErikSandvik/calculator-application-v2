@@ -1,6 +1,11 @@
-import {test, expect} from 'vitest'
+import {describe, it, expect} from 'vitest';
+import CalculatorPageView from "@/views/CalculatorPageView.vue";
 import Calculator from "@/components/Calculator.vue";
+import {mount} from '@vue/test-utils';
 
-test('1 + 1', ()=>{
-    expect(1 + 1).toEqual(2)
+describe('Calculator', () => {
+    it('should render correctly', () => {
+        const wrapper = mount(Calculator)
+
+    })
 })
