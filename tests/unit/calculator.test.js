@@ -13,6 +13,20 @@ describe('Calculator.vue', () => {
         expect(wrapper.exists()).toBe(true);
     });
 
+    it('writes numbers correctly', () => {
+        const wrapper = shallowMount(Calculator, {
+            propsData: {
+                isLogButtonPressed: false,
+            },
+        });
+
+        wrapper.vm.handleNumpadInput(1);
+        wrapper.vm.handleNumpadInput(2);
+        wrapper.vm.handleNumpadInput(3);
+
+        expect(wrapper.vm.screenValue).toBe('123');
+    });
+
     it('adds numbers correctly', () => {
         const wrapper = shallowMount(Calculator, {
             propsData: {
@@ -21,24 +35,66 @@ describe('Calculator.vue', () => {
         });
         // Simulate button clicks to add numbers
         wrapper.vm.handleNumpadInput(1);
+        wrapper.vm.addOperation('+');
         wrapper.vm.handleNumpadInput(2);
-        wrapper.vm.handleNumpadInput(3);
-        // Check if the screen value is updated correctly
-        expect(wrapper.vm.screenValue).toBe('123');
+        wrapper.vm.calculate();
+
+        expect(wrapper.vm.screenValue).toBe('3');
     });
 
-    it('performs addition correctly', () => {
+
+    it('gives math error when dividing by zero', () => {
         const wrapper = shallowMount(Calculator, {
             propsData: {
                 isLogButtonPressed: false,
             },
         });
         wrapper.vm.handleNumpadInput(1);
-        wrapper.vm.handleNumpadInput(2);
-        wrapper.vm.addOperation('+');
-        wrapper.vm.handleNumpadInput(3);
+        wrapper.vm.addOperation('/');
+        wrapper.vm.handleNumpadInput(0);
         wrapper.vm.calculate();
-        expect(wrapper.vm.screenValue).toBe('15');
+        expect(wrapper.vm.screenValue).toBe('Math Error');
+    });
+
+    it('resets calc', () => {
+        const wrapper = shallowMount(Calculator, {
+            propsData: {
+                isLogButtonPressed: false,
+            },
+        });
+        wrapper.vm.resetCalc();
+        expect(wrapper.vm.screenValue).toBe('0');
+    });
+
+
+    it('handles backspace', () => {
+        const wrapper = shallowMount(Calculator, {
+            propsData: {
+                isLogButtonPressed: false,
+            },
+        });
+        wrapper.vm.handleNumpadInput(1);
+        wrapper.vm.handleNumpadInput(1);
+        wrapper.vm.backspace();
+        expect(wrapper.vm.screenValue).toBe('1');
+    });
+
+    it('handles ans correctly', () => {
+        const wrapper = shallowMount(Calculator, {
+            propsData: {
+                isLogButtonPressed: false,
+            },
+        });
+        wrapper.vm.handleNumpadInput(1);
+        wrapper.vm.addOperation('+');
+        wrapper.vm.handleNumpadInput(2);
+        wrapper.vm.calculate();
+
+        wrapper.vm.ansButtonPressed()
+        wrapper.vm.calculate();
+
+
+        expect(wrapper.vm.screenValue).toBe('3');
     });
 
 

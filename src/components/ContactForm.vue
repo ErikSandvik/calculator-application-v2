@@ -6,16 +6,16 @@
 
   <form @submit.prevent="handleSubmit()">
     <label>Name:</label>
-    <input type="text" v-model="formData.name"  @blur="handleNameErrorMsg()" @focus="clearNameError()" @input="validateName()">
+    <input type="text" v-model="formData.name"  @blur="handleNameErrorMsg()" @focus="clearNameError()" @input="validateName()" class="nameInputField">
     <div v-if="nameErrorMessage" class="error">{{ nameErrorMessage }}</div>
 
 
     <label>Email:</label>
-    <input type="email" v-model="formData.email" @blur="handleEmailErrorMsg()" @focus="clearEmailError()" @input="validateEmail()">
+    <input type="email" v-model="formData.email" @blur="handleEmailErrorMsg()" @focus="clearEmailError()" @input="validateEmail()" class="emailInputField">
     <div v-if="emailErrorMessage" class="error">{{ emailErrorMessage }}</div>
 
     <label>Message:</label>
-    <input type="text" v-model="formData.message" @blur="handleMsgErrorMsg()" @focus="clearMsgError()" @input="validateMessage()">
+    <input type="text" v-model="formData.message" @blur="handleMsgErrorMsg()" @focus="clearMsgError()" @input="validateMessage()" class="messageInputField">
     <div v-if="messageErrorMessage" class="error">{{ messageErrorMessage }}</div>
 
     <div class="submit">
