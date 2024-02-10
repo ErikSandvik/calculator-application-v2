@@ -1,6 +1,6 @@
 <template>
     <button class="backButton" title="Return to Home-page" @click="goBackToCalc()">
-      <img :src="getImagePath()" alt="Back"/>
+      <img src="@/assets/back.png" alt="Back"/>
     </button>
 
 
@@ -42,6 +42,11 @@ export default {
       emailIsInvalid : true,
       messageIsInvalid : true,
     }
+  },
+  created() {
+    this.validateName();
+    this.validateEmail();
+    this.validateMessage();
   },
   methods: {
     async handleSubmit() {
@@ -133,7 +138,7 @@ export default {
     },
     goBackToCalc() {
       this.$router.push('/');
-    }
+    },
   },
   computed: {
     isFormInvalid() {
@@ -143,7 +148,6 @@ export default {
       return this.$store.getters.formData;
     }
   },
-
 }
 </script>
 
