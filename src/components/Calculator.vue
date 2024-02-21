@@ -170,21 +170,18 @@ export default {
       CalculatorService.calculate(splitExpression.operation, splitExpression.number1, splitExpression.number2).then(response => {
         console.log('Axios response:', response);
         result = response.data;
+        this.screenValue = result;
+        this.updateAnsValue(result);
+        this.addToLog(this.displayExpression + " " + result)
       })
           .catch(error => {
             console.error('Error:', error);
           });
 
-
-/*      if (this.handleMathError(result)) return;*/
-
-      this.screenValue = result;
       this.displayExpression += " =";
-      this.updateAnsValue(result);
-
       this.includesDecimals = false;
       this.expressionIncludesAns = false;
-      this.addToLog(this.displayExpression + " " + result)
+
     },
     //If the value is infinite then there is a Math error
     handleMathError(value) {
