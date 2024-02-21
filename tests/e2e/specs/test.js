@@ -2,12 +2,12 @@
 
 describe('Vue App End-To-End Tests', () => {
   it('Visits the app root url and checks for header', () => {
-    cy.visit('http://localhost:8081/')
+    cy.visit('http://localhost:8080/')
     cy.contains('header', 'Calculator Application')
   })
 
   it('Types into calculator', () => {
-    cy.visit('http://localhost:8081/');
+    cy.visit('http://localhost:8080/');
     cy.get('#one').click();
     cy.get('#plus').click();
     cy.get('#two').click();

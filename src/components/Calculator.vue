@@ -30,6 +30,8 @@
 </template>
 
 <script>
+import CalculatorService from '@/services/CalculatorService';
+
 export default {
   name: "Calculator",
   props: {
@@ -164,19 +166,25 @@ export default {
         this.replaceAns();
       }
 
-      result = eval(this.displayExpression);
+      const splitExpression = this.splitExpression(this.displayExpression);
+      CalculatorService.calculate(splitExpression.operation, splitExpression.number1, splitExpression.number2).then(response => {
+        console.log('Axios response:', response);
+        result = response.data;
+      })
+          .catch(error => {
+            console.error('Error:', error);
+          });
 
-      if (this.handleMathError(result)) return;
 
-      roundedNumber = this.roundNumber(result, 5);
+/*      if (this.handleMathError(result)) return;*/
 
-      this.screenValue = roundedNumber;
+      this.screenValue = result;
       this.displayExpression += " =";
-      this.updateAnsValue(roundedNumber);
+      this.updateAnsValue(result);
 
       this.includesDecimals = false;
       this.expressionIncludesAns = false;
-      this.addToLog(this.displayExpression + " " + roundedNumber)
+      this.addToLog(this.displayExpression + " " + result)
     },
     //If the value is infinite then there is a Math error
     handleMathError(value) {
@@ -187,6 +195,23 @@ export default {
         return true;
       }
       else return false;
+    },
+    splitExpression(expr) {
+      const regex = /(-?\d+(?:\.\d+)?)\s*([+\-*\/])\s*(-?\d+(?:\.\d+)?)/;
+      const match = expr.match(regex);
+
+      if (match) {
+        // Extracting the matched groups
+        const number1 = match[1];
+        const operation = match[2];
+        const number2 = match[3];
+
+        return { number1, operation, number2 };
+      } else {
+        // Handle cases where the expression does not match the expected format
+        console.log("Expression format is incorrect.");
+        return null;
+      }
     },
     replaceAns() {
       this.displayExpression = this.displayExpression.replace(/ANS/g, this.ansValue);

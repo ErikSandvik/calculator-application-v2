@@ -1,5 +1,16 @@
 {
   "contactForms": [
-
+    {
+      "id": "d98e",
+      "name": "Erik Sandvik",
+      "email": "erik_sandvik@outlook.com",
+      "message": "dawdjawdj wadjawikdjaoikwjdasd"
+    },
+    {
+      "id": "7b9d",
+      "name": "John Doe",
+      "email": "johndoegmailcomjohndoe@gmail.com",
+      "message": "Hello world"
+    }
   ]
 }
