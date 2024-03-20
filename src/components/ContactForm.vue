@@ -137,7 +137,7 @@ export default {
       return require('@/assets/back.png');
     },
     goBackToCalc() {
-      this.$router.push('/');
+      this.$router.push({ name: 'Calculator' });
     },
   },
   computed: {

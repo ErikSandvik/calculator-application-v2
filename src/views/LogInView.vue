@@ -1,17 +1,20 @@
-<script setup>
+
+<template>
+  <LogIn/>
+</template>
+
+<script>
  import LogIn from "@/components/LogIn.vue";
 
  export default {
-   name: "LogIn",
+   name: "LogInView",
    components: {
      LogIn,
    }
  }
 </script>
 
-<template>
-<LogIn/>
-</template>
+
 
 <style scoped>
 

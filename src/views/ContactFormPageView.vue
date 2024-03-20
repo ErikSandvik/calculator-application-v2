@@ -5,6 +5,7 @@
 <script>
 import ContactForm
   from "@/components/ContactForm.vue";
+import LogIn from "@/components/LogIn.vue";
 
 export default {
   name: "ContactFormPageView",

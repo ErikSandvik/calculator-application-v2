@@ -2,17 +2,23 @@ import { createRouter, createWebHistory } from 'vue-router'
 
 import CalculatorPageView from "@/views/CalculatorPageView";
 import ContactFormPageView from "@/views/ContactFormPageView";
+import LogInView from "@/views/LogInView.vue";
 
 const routes = [
   {
     path: '/',
     name: 'home',
-    component: CalculatorPageView
+    component: LogInView
   },
   {
     path: '/contact-form',
     name: 'Contact-form',
     component: ContactFormPageView
+  },
+  {
+    path: '/',
+    name: 'Calculator',
+    component: CalculatorPageView
   },
 ]
 

@@ -1,104 +1,80 @@
 <template>
-  <div class="login-container">
-    <h1>Login</h1>
-    <form @submit.prevent="handleLogin">
-      <div class="form-group">
+  <div class="log-window">
+    <h2>{{ isLoginMode ? "Login" : "Register" }}</h2>
+    <form @submit.prevent="isLoginMode ? login() : register()">
+      <div>
         <label for="username">Username</label>
-        <input
-            type="text"
-            id="username"
-            v-model="loginForm.username"
-            required
-            autofocus
-        />
+        <input id="username" v-model="credentials.username" required>
       </div>
-      <div class="form-group">
+      <div>
         <label for="password">Password</label>
-        <input
-            type="password"
-            id="password"
-            v-model="loginForm.password"
-            required
-        />
+        <input id="password" type="password" v-model="credentials.password" required>
       </div>
-      <div class="form-group">
-        <button type="submit" class="login-button">Login</button>
-      </div>
-      <p v-if="error" class="error-message">{{ error }}</p>
+      <button type="submit">{{ isLoginMode ? "Login" : "Register" }}</button>
     </form>
+    <button @click="toggleMode">
+      Switch to {{ isLoginMode ? "Register" : "Login" }}
+    </button>
   </div>
 </template>
 
 <script>
+import AuthService from "@/services/AuthService"; // Ensure you have created this service
+
 export default {
-  name: 'Login',
   data() {
     return {
-      loginForm: {
-        username: '',
-        password: ''
+      credentials: {
+        username: "",
+        password: ""
       },
-      error: null
+      isLoginMode: true,
     };
   },
   methods: {
-    handleLogin() {
-      // Here you would integrate with your authentication service
-      // This is just a stub to simulate an async login operation
-      if (this.loginForm.username && this.loginForm.password) {
-        this.error = null;
-        this.$emit('login', { ...this.loginForm });
-        // You might want to redirect or do something else on successful login
-      } else {
-        this.error = 'Please enter both username and password.';
+    async login() {
+      try {
+        const response = await AuthService.login(this.credentials.username, this.credentials.password);
+        localStorage.setItem("token", response.data.token);
+        this.$router.push({ name: 'Calculator' });
+      } catch (error) {
+        alert("Login failed: " + error.response.data);
       }
+    },
+    async register() {
+      try {
+        await AuthService.register(this.credentials.username, this.credentials.password);
+        this.isLoginMode = true; // Switch to login mode after successful registration
+        alert("Registration successful, please login.");
+      } catch (error) {
+        alert("Registration failed: " + error.response.data);
+      }
+    },
+    toggleMode() {
+      this.isLoginMode = !this.isLoginMode;
     }
   }
 };
 </script>
 
 <style scoped>
-.login-container {
-  max-width: 400px;
-  margin: 50px auto;
+.log-window {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
   padding: 20px;
-  text-align: center;
-  border: 1px solid #ccc;
-  border-radius: 8px;
 }
 
-.form-group {
-  margin-bottom: 20px;
+.log-window form {
+  margin-bottom: 10px;
 }
 
-.form-group label {
-  display: block;
-  margin-bottom: 5px;
+.log-window label {
+  margin-right: 5px;
 }
 
-.form-group input {
-  width: 100%;
-  padding: 10px;
-  border-radius: 4px;
-  border: 1px solid #ccc;
-}
-
-.login-button {
-  width: 100%;
-  padding: 10px;
-  border-radius: 4px;
-  border: none;
-  background-color: #5cb85c;
-  color: white;
-  font-size: 16px;
-  cursor: pointer;
-}
-
-.login-button:hover {
-  background-color: #4cae4c;
-}
-
-.error-message {
-  color: #d9534f;
+.log-window input {
+  margin-bottom: 10px;
 }
 </style>
