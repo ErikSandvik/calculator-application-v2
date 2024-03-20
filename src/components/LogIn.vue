@@ -35,7 +35,10 @@ export default {
     async login() {
       try {
         const response = await AuthService.login(this.credentials.username, this.credentials.password);
-        localStorage.setItem("token", response.data.token);
+        const accessToken = response.data.accessToken;
+        console.log(response.data);
+        localStorage.setItem("token", accessToken);
+        console.log(localStorage.getItem("token"));
         this.$router.push({ name: 'Calculator' });
       } catch (error) {
         alert("Login failed: " + error.response.data);
