@@ -3,7 +3,7 @@
   <Header class="header"></Header>
   <Calculator :calcLog="calcLog" @logUpdate="updateCalcLog" :isLogButtonPressed="isLogButtonPressed" class="calculator"></Calculator>
   <LogButton @toggleLog="toggleLogWindow()" class="logButton"></LogButton>
-  <LogWindow v-show="showLog" :calcLog="calcLog" class="logWindow"></LogWindow>
+  <LogWindow v-show="showLog" class="logWindow"></LogWindow>
   <div class="reviewButton">
     <img :src="getImagePath()" alt="reviewButton" title="Go to Contact-forms" @click="goToContactForm()"/>
   </div>

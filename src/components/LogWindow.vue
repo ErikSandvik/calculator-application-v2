@@ -2,24 +2,47 @@
   <div id="logWindow">
     <div id="logWindowTitle">Log</div>
     <ul id="logList">
-      <li v-for="(logEntry, index) in calcLog" :key="index">{{ logEntry }}</li>
+      <li v-for="(logEntry, index) in calculationLog" :key="index">
+        {{ logEntry.number1 }} {{ logEntry.operation }} {{ logEntry.number2 }} = {{ logEntry.result }}
+      </li>
     </ul>
   </div>
 </template>
 
 <script>
+// Import the service
+import LogService from '@/services/LogService';
+
 export default {
   name: "LogWindow",
   props: {
-    calcLog: [],
+    calcLog: Array,
   },
   data() {
     return {
-      logButtonIsPressed : false,
-    }
+      logButtonIsPressed: false,
+      calculationLog: [],
+    };
   },
+  mounted() {
+    this.fetchCalculationLog();
+  },
+  methods: {
+    fetchCalculationLog() {
+      LogService.getCalculationLog()
+          .then(response => {
+            console.log("Fetched log entries:", response.data); // Log what was returned
+            this.calculationLog = response.data;
+            console.log("Updated state of calculationLog:", this.calculationLog); // Log the updated state
+          })
+          .catch(error => {
+            console.error("There was an error fetching the calculation log:", error);
+          });
+    },
+  }
 }
 </script>
+
 
 <style scoped>
 #logWindow {
