@@ -1,20 +1,22 @@
 <template>
   <div class="log-window">
     <h2>{{ isLoginMode ? "Login" : "Register" }}</h2>
-    <form @submit.prevent="isLoginMode ? login() : register()">
-      <div>
+    <form @submit.prevent="isLoginMode ? login() : register()" class="log-form">
+      <div class="form-group">
         <label for="username">Username</label>
-        <input id="username" v-model="credentials.username" required>
+        <input id="username" type="text" v-model="credentials.username" required>
       </div>
-      <div>
+      <div class="form-group">
         <label for="password">Password</label>
         <input id="password" type="password" v-model="credentials.password" required>
       </div>
-      <button type="submit">{{ isLoginMode ? "Login" : "Register" }}</button>
+      <button type="submit" class="submit-btn">{{ isLoginMode ? "Login" : "Register" }}</button>
     </form>
-    <button @click="toggleMode">
+
+    <button @click="toggleMode" class="toggle-btn">
       Switch to {{ isLoginMode ? "Register" : "Login" }}
     </button>
+
   </div>
 </template>
 
@@ -65,19 +67,71 @@ export default {
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
-  padding: 20px;
+  justify-content: space-between;
+  padding: 30px;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+  width: 35rem;
+  height: 25rem;
+  background-color: #fff;
+  box-sizing: border-box;
 }
 
-.log-window form {
-  margin-bottom: 10px;
+h2 {
+  color: #333;
 }
 
-.log-window label {
-  margin-right: 5px;
+.form-group {
+  width: 100%;
+  margin-bottom: 1rem;
 }
 
-.log-window input {
-  margin-bottom: 10px;
+.form-group label {
+  display: block;
+  margin-bottom: 0.5rem;
+  color: #666;
+}
+
+.form-group input {
+  width: calc(100% - 20px);
+  padding: 10px;
+  border-radius: 4px;
+  border: 1px solid #ddd;
+  box-sizing: border-box;
+}
+
+.log-form {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.submit-btn, .toggle-btn {
+  width: 18rem;
+  padding: 12px;
+  border: none;
+  border-radius: 4px;
+  color: #fff;
+  cursor: pointer;
+  font-size: 1rem;
+  box-sizing: border-box;
+  text-align: center;
+}
+
+.submit-btn {
+  background-color: #5cb85c;
+  margin-bottom: 1rem;
+}
+
+.toggle-btn {
+  background-color: #5bc0de;
+}
+
+.submit-btn:hover, .toggle-btn:hover {
+  opacity: 0.9;
 }
 </style>
+
+
+
