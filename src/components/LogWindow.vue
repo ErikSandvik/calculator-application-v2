@@ -2,7 +2,7 @@
   <div id="logWindow">
     <div id="logWindowTitle">Log</div>
     <ul id="logList">
-      <li v-for="(logEntry, index) in calculationLog" :key="index">
+      <li v-for="(logEntry, index) in calculationLog" :key="index" @click="handleLogEntryClick(logEntry)">
         {{ logEntry.number1 }} {{ logEntry.operation }} {{ logEntry.number2 }} = {{ logEntry.result }}
       </li>
     </ul>
@@ -12,6 +12,8 @@
 <script>
 // Import the service
 import LogService from '@/services/LogService';
+import { mapMutations } from 'vuex';
+
 
 export default {
   name: "LogWindow",
@@ -38,7 +40,14 @@ export default {
           .catch(error => {
             console.error("There was an error fetching the calculation log:", error);
           });
-    },
+    },  ...mapMutations(['setLogEntryDetails']),
+    handleLogEntryClick(logEntry) {
+      // Directly call the method mapped to the mutation
+      this.setLogEntryDetails({
+        expression: `${logEntry.number1} ${logEntry.operation} ${logEntry.number2}`,
+        result: logEntry.result
+      });
+    }
   }
 }
 </script>
@@ -89,6 +98,11 @@ export default {
   margin-top: 0.8rem;
 
   text-align: center;
+}
+
+#logList li:hover {
+
+  cursor:pointer;
 }
 
 #logWindowTitle {
