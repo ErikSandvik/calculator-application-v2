@@ -11,7 +11,7 @@ axiosInstance.interceptors.response.use(
         if (error.response && error.response.status === 401) {
             alert('Expired or invalid session token. Please log in again.');
             // Clear the token from local storage
-            localStorage.removeItem('token');
+            sessionStorage.removeItem('token');
             // Redirect to login using the name of the login route
             router.push({ name: 'home' });
         }
