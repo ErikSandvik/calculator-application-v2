@@ -30,6 +30,9 @@ export default {
     this.fetchCalculationLog();
   },
   methods: {
+    updateLogEvent() {
+      this.fetchCalculationLog();
+    },
     fetchCalculationLog() {
       LogService.getCalculationLog()
           .then(response => {

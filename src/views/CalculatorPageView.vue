@@ -1,9 +1,9 @@
 <template>
 <div class="container" :class="{ 'logButtonPressed': isLogButtonPressed }">
   <Header class="header"></Header>
-  <Calculator :calcLog="calcLog" @logUpdate="updateCalcLog" :isLogButtonPressed="isLogButtonPressed" class="calculator"></Calculator>
+  <Calculator :calcLog="calcLog" @updateLog="updateCalcLog" :isLogButtonPressed="isLogButtonPressed" class="calculator"></Calculator>
   <LogButton @toggleLog="toggleLogWindow()" class="logButton"></LogButton>
-  <LogWindow v-show="showLog" class="logWindow"></LogWindow>
+  <LogWindow v-show="showLog" class="logWindow" ref="logWindow"></LogWindow>
   <div class="reviewButton">
     <img :src="getImagePath()" alt="reviewButton" title="Go to Contact-forms" @click="goToContactForm()"/>
   </div>
@@ -27,7 +27,6 @@ export default {
   data() {
     return {
       showLog: false,
-      calcLog: [],
       isLogButtonPressed: false,
     }
   },
@@ -36,8 +35,8 @@ export default {
       this.showLog = !this.showLog
       this.isLogButtonPressed = !this.isLogButtonPressed;
     },
-    updateCalcLog(calcLog) {
-      this.calcLog = calcLog;
+    updateCalcLog() {
+      this.$refs.logWindow.updateLogEvent();
     },
     getImagePath() {
       return require('@/assets/Chatbubble.png');

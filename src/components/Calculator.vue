@@ -183,7 +183,7 @@ export default {
         result = response.data;
         this.screenValue = result;
         this.updateAnsValue(result);
-        this.addToLog(this.displayExpression + " " + result)
+        this.$emit('updateLog');
       })
           .catch(error => {
             console.error('Error:', error);
@@ -192,6 +192,7 @@ export default {
       this.displayExpression += " =";
       this.includesDecimals = false;
       this.expressionIncludesAns = false;
+
 
     },
     //If the value is infinite then there is a Math error
