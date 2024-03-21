@@ -169,7 +169,7 @@ export default {
       const splitExpression = this.splitExpression(this.displayExpression);
       CalculatorService.calculate(splitExpression.operation, splitExpression.number1, splitExpression.number2).then(response => {
         console.log('Axios response:', response);
-        result = response.data.result;
+        result = response.data;
         this.screenValue = result;
         this.updateAnsValue(result);
         this.addToLog(this.displayExpression + " " + result)
