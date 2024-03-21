@@ -164,6 +164,9 @@ export default {
       this.calcReqNewValue = true;
       this.includesDecimals = false;
     },
+    emitLogUpdate() {
+      this.$emit('log-update', true);
+    },
     calculate() {
       let result;
       let roundedNumber;
@@ -192,6 +195,7 @@ export default {
       this.displayExpression += " =";
       this.includesDecimals = false;
       this.expressionIncludesAns = false;
+
 
     },
     //If the value is infinite then there is a Math error

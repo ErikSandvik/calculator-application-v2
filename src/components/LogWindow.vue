@@ -19,6 +19,7 @@ export default {
   name: "LogWindow",
   props: {
     calcLog: Array,
+    triggerMethod: Boolean,
   },
   data() {
     return {
@@ -28,6 +29,12 @@ export default {
   },
   mounted() {
     this.fetchCalculationLog();
+  },
+  watch: {
+    triggerUpdate(newVal) {
+      this.fetchCalculationLog();
+      this.$emit('update:triggerMethod', false);
+    }
   },
   methods: {
     fetchCalculationLog() {

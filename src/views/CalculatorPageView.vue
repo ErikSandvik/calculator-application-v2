@@ -1,9 +1,9 @@
 <template>
 <div class="container" :class="{ 'logButtonPressed': isLogButtonPressed }">
   <Header class="header"></Header>
-  <Calculator :calcLog="calcLog" @logUpdate="updateCalcLog" :isLogButtonPressed="isLogButtonPressed" class="calculator"></Calculator>
+  <Calculator :calcLog="calcLog" @log-update="handleLogUpdate" :isLogButtonPressed="isLogButtonPressed" class="calculator"></Calculator>
   <LogButton @toggleLog="toggleLogWindow()" class="logButton"></LogButton>
-  <LogWindow v-show="showLog" class="logWindow"></LogWindow>
+  <LogWindow v-show="showLog" class="logWindow"  :trigger-method="logMethodTriggered"></LogWindow>
   <div class="reviewButton">
     <img :src="getImagePath()" alt="reviewButton" title="Go to Contact-forms" @click="goToContactForm()"/>
   </div>
@@ -29,6 +29,8 @@ export default {
       showLog: false,
       calcLog: [],
       isLogButtonPressed: false,
+      logMethodTriggered: false,
+
     }
   },
   methods: {
@@ -44,6 +46,9 @@ export default {
     },
     goToContactForm() {
       this.$router.push({ name: 'Contact-form' });
+    },
+    handleLogUpdate() {
+      this.logMethodTriggered = true;
     }
   },
 }
