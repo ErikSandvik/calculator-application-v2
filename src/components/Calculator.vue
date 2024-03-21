@@ -31,6 +31,7 @@
 
 <script>
 import CalculatorService from '@/services/CalculatorService';
+import { mapGetters } from 'vuex';
 
 export default {
   name: "Calculator",
@@ -53,8 +54,18 @@ export default {
       logButtonIsPressed : false,
     }
   },
+  watch: {
+    '$store.state.logEntryDetails': {
+      deep: true,
+      handler(newEntry) {
+        this.displayExpression = newEntry.expression;
+        this.screenValue = newEntry.result;
+      },
+    },
+  },
   methods: {
     handleNumpadInput(input) {
+      console.log("This:", this.$store.state.logEntryDetails);
       let updatedScreenValue;
 
       if (this.newValueInput(input)) return;

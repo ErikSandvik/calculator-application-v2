@@ -40,10 +40,10 @@ export default {
           .catch(error => {
             console.error("There was an error fetching the calculation log:", error);
           });
-    },  ...mapMutations(['setLogEntryDetails']),
+    },
     handleLogEntryClick(logEntry) {
       // Directly call the method mapped to the mutation
-      this.setLogEntryDetails({
+      this.$store.commit('setLogEntryDetails', {
         expression: `${logEntry.number1} ${logEntry.operation} ${logEntry.number2}`,
         result: logEntry.result
       });
